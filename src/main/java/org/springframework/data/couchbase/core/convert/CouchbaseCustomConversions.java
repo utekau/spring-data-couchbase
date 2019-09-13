@@ -48,6 +48,7 @@ public class CouchbaseCustomConversions extends org.springframework.data.convert
 
     converters.addAll(DateConverters.getConvertersToRegister());
     converters.addAll(CouchbaseJsr310Converters.getConvertersToRegister());
+    converters.addAll(CouchbaseCustomConverters.getConvertersToRegister());
 
     STORE_CONVERTERS = Collections.unmodifiableList(converters);
     STORE_CONVERSIONS = StoreConversions.of(SimpleTypeHolder.DEFAULT, STORE_CONVERTERS);
