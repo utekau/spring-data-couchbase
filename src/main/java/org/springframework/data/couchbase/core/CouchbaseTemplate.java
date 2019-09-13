@@ -97,7 +97,7 @@ import static org.springframework.data.couchbase.core.support.TemplateUtils.SELE
 public class CouchbaseTemplate implements CouchbaseOperations, ApplicationEventPublisherAware {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CouchbaseTemplate.class);
-  private static final WriteResultChecking DEFAULT_WRITE_RESULT_CHECKING = WriteResultChecking.NONE;
+  private static final WriteResultChecking DEFAULT_WRITE_RESULT_CHECKING = WriteResultChecking.EXCEPTION;
   private static final Collection<String> ITERABLE_CLASSES;
 
   static {
