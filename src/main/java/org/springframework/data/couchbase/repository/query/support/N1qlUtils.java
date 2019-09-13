@@ -25,6 +25,7 @@ import static org.springframework.data.couchbase.core.support.TemplateUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.couchbase.core.convert.CouchbaseConverter;
@@ -167,6 +168,9 @@ public class N1qlUtils {
    * Produces an {@link Expression} that can serve as a WHERE clause criteria to only select documents in a bucket
    * that matches a particular Spring Data entity (as given by the {@link EntityMetadata} parameter).
    *
+   * This method updated due to specific "type" field usage in Spring Data Couchbase clients. We don't want to use full
+   * package name for entities, otherwise repository queries don't bring any data because of this where filter.
+   *
    * @param baseWhereCriteria the other criteria of the WHERE clause, or null if none.
    * @param converter the {@link CouchbaseConverter} giving the attribute storing the type information can be extracted.
    * @param entityInformation the expected type information.
@@ -177,6 +181,12 @@ public class N1qlUtils {
     //add part that filters on type key
     String typeKey = converter.getTypeKey();
     String typeValue = entityInformation.getJavaType().getName();
+    // We need to be sure that given typeValue is a real package name
+    if (typeValue.matches("(?:^\\w+|\\w+\\.\\w+)+$")) {
+      String[] splittedPackageName = typeValue.split(Pattern.quote("."));
+      // Get the last item since it is equal to actual entity type - without package prefix
+      typeValue = splittedPackageName[splittedPackageName.length - 1];
+    }
     Expression typeSelector = i(typeKey).eq(s(typeValue));
     if (baseWhereCriteria == null) {
       baseWhereCriteria = typeSelector;
