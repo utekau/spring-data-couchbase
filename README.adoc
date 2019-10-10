@@ -4,6 +4,7 @@
 	* To map pojos and entities class package name is used normally. For example, "_class" or "javaClass" fields have something like "com.abc.domain.xyz". By adding "DocumentType" annotation and providing the type maps them through "type" field in data and only class name exists there. This will provide much cleaner code and remove the necessity of sending totally backend related information to mobile devices if sync is active, of course.
   - DEFAULT_WRITE_RESULT_CHECKING field changed in CouchbaseTemplate 
     * In order not to miss any kind of write related exceptions this value was changed. The default behavior might cause some unhandled exception related case which was reported in stackoverflow several times.
+  - Persisting null values included
   - This library forked from 3.1.10.RELEASE.
   - Usage is like below for the including library in the project. If spring-boot-starter-data-couchbase is already included in pom.xml, you can use exclusion to discard it.
     
@@ -11,7 +12,7 @@
 		<dependency>
 			<groupId>com.github.utekau</groupId>
 			<artifactId>spring-data-couchbase</artifactId>
-			<version>3.1.19.RELEASE</version>
+			<version>3.1.25.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jcl-over-slf4j</artifactId>

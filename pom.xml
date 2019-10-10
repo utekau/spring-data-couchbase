@@ -5,7 +5,7 @@
 
     <groupId>com.github.utekau</groupId>
     <artifactId>spring-data-couchbase</artifactId>
-    <version>3.1.19.RELEASE</version>
+    <version>3.1.25.RELEASE</version>
 
     <name>Spring Data Couchbase</name>
     <description>This is forked Spring Data Couchbase library to add few custom implementations</description>

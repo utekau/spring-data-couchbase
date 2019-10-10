@@ -515,6 +515,9 @@ public class MappingCouchbaseConverter extends AbstractCouchbaseConverter
             writeSimpleInternal(propertyObj, target, prop.getFieldName());
           }
         }
+        else { // We persist null values too
+          writeSimpleInternal(null, target, prop.getFieldName());
+        }
       }
     });
 

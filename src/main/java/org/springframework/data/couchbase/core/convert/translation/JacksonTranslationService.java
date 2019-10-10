@@ -101,9 +101,7 @@ public class JacksonTranslationService implements TranslationService, Initializi
         continue;
       }
 
-      final Class<?> clazz = value.getClass();
-
-      if (simpleTypeHolder.isSimpleType(clazz) && !isEnumOrClass(clazz)) {
+      if (value != null && simpleTypeHolder.isSimpleType(value.getClass()) && !isEnumOrClass(value.getClass())) {
         generator.writeObject(value);
       }
       else {
